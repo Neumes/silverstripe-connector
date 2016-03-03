@@ -83,6 +83,8 @@ class RemoteDataObjectHandler {
 		if (ClassInfo::exists($clazz)) {
 			// we'll create one
 			$object = new $clazz;
+		} elseif($node->getElementsByTagName('Filename')->length != 0) {
+			$object = new File();
 		} else {
 			$object = new Page();
 		}

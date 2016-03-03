@@ -8,7 +8,8 @@
  */
 class ImportedDataExtension extends DataExtension {
 	private static $db = array(
-		'RemoteSystemId'		=> 'Varchar',
-		'RemoteNodeId'			=> 'Varchar',
+		'RemoteSystemId'		=> 'Varchar(255)',
+		'RemoteNodeId'			=> 'Varchar(255)',
+		'SourceClassName'		=> 'Varchar(255)'
 	);
 }
