@@ -1,0 +1,6 @@
+SiteTree:
+  extensions:
+    ['ImportedDataExtension']
+File:
+  extensions:
+    ['ImportedDataExtension']
