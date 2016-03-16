@@ -16,7 +16,16 @@ class SilverStripeDataObjectImporter implements ExternalContentTransformer
 		if (strlen($item->ClassName) && ClassInfo::exists($item->ClassName)) {
 			$cls = $item->ClassName;
 		}
-		
+
+		// This allows us to override certain dataobjects which we know aren't going to
+		// exist in the new migration. It's a bit of a hack but it works as long as the
+		// object isn't too different... i.e. Import extended DOs back to more of a base type
+		// such as ExtendedImage -> Image
+		$importMap = Config::inst()->get('SilverStripeDataObjectImporter', 'dataobject_import_map');
+		if(is_array($importMap) && array_key_exists($item->SourceClassName, $importMap) && class_exists($importMap[$item->SourceClassName])) {
+			$cls = $importMap[$item->SourceClassName];
+		}
+
 		if ($cls == 'SiteTree') {
 			$cls = 'Page';
 		}
